@@ -14,6 +14,10 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone',
+        'role_id',
+        'image',
+        'image_alt',
         'password',
         'permissions',
     ];
@@ -63,4 +67,9 @@ class User extends Authenticatable
         'updated_at',
         'created_at',
     ];
+
+    public function customRole()
+    {
+        return $this->belongsTo(CustomRole::class, 'role_id', 'id');
+    }
 }

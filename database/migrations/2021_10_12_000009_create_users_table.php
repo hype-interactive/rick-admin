@@ -25,12 +25,25 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('email');
+            $table->string('phone')->nullable()->default(null);
             $table->timestamp('email_verified_at')->nullable()->default(null);
+            $table->unsignedInteger('role_id')->nullable()->default(1);
+            $table->string('image')->nullable()->default(null);
+            $table->string('image_alt')->nullable()->default(null);
             $table->string('password');
             $table->rememberToken();
             $table->json('permissions')->nullable()->default(null);
 
             $table->unique(["email"], 'users_email_unique');
+            $table->unique(["phone"], 'users_phone_unique');
+
+            $table->index(["role_id"], 'fk_users_roles_idx');
+
+            $table->foreign('role_id', 'fk_users_roles_idx')
+                ->references('id')->on('custom_roles')
+                ->onDelete('no action')
+                ->onUpdate('no action');
+
             $table->nullableTimestamps();
         });
     }
@@ -40,8 +53,8 @@ class CreateUsersTable extends Migration
      *
      * @return void
      */
-     public function down()
-     {
-       Schema::dropIfExists($this->tableName);
-     }
+    public function down()
+    {
+        Schema::dropIfExists($this->tableName);
+    }
 }
