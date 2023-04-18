@@ -8,6 +8,8 @@ use Orchid\Screen\AsSource;
 
 class AuthorDetails extends Model
 {
+    protected $table = 'author_details';
+    
     use HasFactory, AsSource;
 
     protected $fillable = [

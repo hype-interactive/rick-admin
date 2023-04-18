@@ -22,7 +22,12 @@ class AdvertFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->sentence(3),
+            'description' => $this->faker->paragraph(2),
+            'type' => $this->faker->randomElement(['vertical', 'horizontal']),
+            'link' => $this->faker->url,
+            'price' => $this->faker->randomFloat(2, 100, 10000),
+            'image' => $this->faker->imageUrl(),
         ];
     }
 }

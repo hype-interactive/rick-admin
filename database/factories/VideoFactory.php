@@ -22,7 +22,10 @@ class VideoFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'url' => $this->faker->url,
+            'slug' => $this->faker->slug(3, false),
+            'visibility' => rand(0, 1),
+            'published_at' => $this->faker->dateTimeBetween('-1 month', 'now'),
         ];
     }
 }

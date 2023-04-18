@@ -22,7 +22,8 @@ class AuthorDetailsFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id' => $this->faker->numberBetween(2, 10),
+            'title' => $this->faker->sentence(3),
         ];
     }
 }

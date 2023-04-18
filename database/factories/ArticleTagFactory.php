@@ -22,7 +22,8 @@ class ArticleTagFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'article_id' => rand(1, 10),
+            'tag_id' => rand(1, 10),
         ];
     }
 }

@@ -22,7 +22,11 @@ class InterviewFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->sentence(3),
+            'subtitle' => $this->faker->sentence(3),
+            'body' => $this->faker->paragraph(4),
+            'video_id' => rand(1, 10),
+            'slug' => $this->faker->slug(3, false),
         ];
     }
 }

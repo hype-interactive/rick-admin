@@ -22,7 +22,14 @@ class LyricsFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'image' => $this->faker->imageUrl(640, 480, 'lyrics', true, 'Faker'),
+            'cover_image' => $this->faker->imageUrl(640, 480, 'lyrics', true, 'Faker'),
+            'song' => $this->faker->sentence(3),
+            'artist_id' => $this->faker->numberBetween(1, 10),
+            'album' => $this->faker->sentence(3, true),
+            'audio_link' => $this->faker->url,
+            'video_link' => $this->faker->url,
+            'visibility' => rand(0, 1),
         ];
     }
 }

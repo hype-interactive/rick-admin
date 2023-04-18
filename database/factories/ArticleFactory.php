@@ -22,7 +22,16 @@ class ArticleFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->sentence(3),
+            'subtitle' => $this->faker->paragraph(2),
+            'user_id' => rand(1, 10),
+            'published_at' => $this->faker->dateTimeBetween('-1 month', 'now'),
+            'content' => $this->faker->paragraph(10),
+            'image' => $this->faker->imageUrl(),
+            'slug' => $this->faker->slug(3, false),
+            'category_id' => rand(1, 10),
+            'visibility' => rand(0, 1),
+            'pin' => rand(0, 1),
         ];
     }
 }
