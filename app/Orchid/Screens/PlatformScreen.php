@@ -16,14 +16,14 @@ class PlatformScreen extends Screen
      *
      * @var string
      */
-    public $name = 'Get Started';
+    public $name = 'Rick Media';
 
     /**
      * Display header description.
      *
      * @var string
      */
-    public $description = 'Welcome to your Orchid application.';
+    public $description = 'Welcome to Rick Media Admin Panel';
 
     /**
      * Query data.
@@ -33,49 +33,19 @@ class PlatformScreen extends Screen
     public function query(): array
     {
 
-        // Actual data gruping monthly example 
-        
-            // $vendor_monthly_groups=DB::table('vendors')->select(DB::raw('count(id) as `data`'), DB::raw("DATE_FORMAT(created_at, '%m-%Y') new_date"),  DB::raw('YEAR(created_at) year, MONTH(created_at) month'))
-            //                         ->groupby('year','month')
-            //                         ->get();
+        return [];
 
-            // $values=[];
-            // $count=0;
-            // $months_raw=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-            // $months=[];
-
-            // foreach ($vendor_monthly_groups as $entry) {
-
-            // if($entry->year == date("Y")){
-            // array_push($values,$entry->data);
-            // array_push($months,$months_raw[$count]);
-            // $count++;
-            // }
-
-            // }
-
-            // $charts = [
-            // [
-            // 'labels' => $months,
-            // 'title'  => 'Year - ' . date("Y"),
-            // 'values' => array_reverse($values),
-            // ],
-
-            // ];
-
-            
-
-        $charts = [
-            [
-                'labels' => ['january','february','march','april','may','june','july'],
-                'title'  => 'Some Data',
-                'values' => [25, 40, 30, 35, 8, 52, 17, -4],
-            ],
-        ];
+        // $charts = [
+        //     [
+        //         'labels' => ['january','february','march','april','may','june','july'],
+        //         'title'  => 'Some Data',
+        //         'values' => [25, 40, 30, 35, 8, 52, 17, -4],
+        //     ],
+        // ];
     
-        return [
-            'charts' => $charts,
-        ];
+        // return [
+        //     'charts' => $charts,
+        // ];
     }
 
     /**
@@ -86,7 +56,10 @@ class PlatformScreen extends Screen
     public function commandBar(): array
     {
         return [
-           
+            Link::make('Go to Site')
+                ->href('https://rickmedia.hype.co.tz')
+                ->target('_blank')
+                ->icon('globe-alt'),
         ];
     }
 
@@ -98,7 +71,7 @@ class PlatformScreen extends Screen
     public function layout(): array
     {
         return [
-            ChartsLayout::class
+            // ChartsLayout::class
         ];
     }
 }
