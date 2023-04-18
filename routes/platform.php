@@ -13,6 +13,8 @@ use App\Orchid\Screens\FAQs\FAQsEditScreen;
 use App\Orchid\Screens\FAQs\FAQsListScreen;
 use App\Orchid\Screens\News\NewsEditScreen;
 use App\Orchid\Screens\News\NewsListScreen;
+use App\Orchid\Screens\Author\AuthorListScreen;
+use App\Orchid\Screens\Author\AuthorEditScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
@@ -98,40 +100,40 @@ Route::screen('roles', RoleListScreen::class)
 // NEWS
 
 //platform > news
-Route::screen('news',NewsListScreen::class)
+Route::screen('news', NewsListScreen::class)
     ->name('platform.news')
     ->breadcrumbs(function(Trail $trail){
         return $trail
             ->parent('platform.index')
-            ->push(_('News'),route('platform.news'));
+            ->push(__('News'), route('platform.news'));
     });
 
 // Home > news > edit 
-Route::screen('news-edit/{news?}',NewsEditScreen::class)
+Route::screen('news-edit/{news?}', NewsEditScreen::class)
     ->name('platform.news.edit')
     ->breadcrumbs(function(Trail $trail){
         return $trail
             ->parent('platform.news')
-            ->push(_('Edit'),route('platform.news.edit'));
+            ->push(__('Edit'), route('platform.news.edit'));
     });
 
 // FAQ
 
 // Home > Faqs
-Route::screen('faqs',FAQsListScreen::class)
+Route::screen('faqs', FAQsListScreen::class)
     ->name('platform.faqs')
     ->breadcrumbs(function (Trail $trail){
         return $trail
             ->parent('platform.index')
-            ->push(_('Faqs'),route('platform.faqs'));
+            ->push(__('Faqs'), route('platform.faqs'));
     });
 
 // Home > Faqs > Edit
-Route::screen('faq/{faq?}',FAQsEditScreen::class)
+Route::screen('faq/{faq?}', FAQsEditScreen::class)
     ->name('platform.faqs.faq')
     ->breadcrumbs(function (Trail $trail){
         return $trail
             ->parent('platform.faqs')
-            ->push(_('Edit'),route('platform.faqs.faq'));
+            ->push(__('Edit'), route('platform.faqs.faq'));
     });
 
