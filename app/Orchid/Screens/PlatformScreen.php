@@ -72,6 +72,7 @@ class PlatformScreen extends Screen
     {
         return [
             // ChartsLayout::class
+            Layout::view('home')
         ];
     }
 }
