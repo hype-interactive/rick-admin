@@ -54,7 +54,7 @@ class AuthorListScreen extends Screen
         return [
             Link::make(__('Add'))
                 ->icon('plus')
-                ->route('platform.systems.users.create')
+                ->route('platform.author.edit', null)
         ];
     }
 
@@ -65,6 +65,27 @@ class AuthorListScreen extends Screen
      */
     public function layout(): array
     {
-        return [];
+        return [
+            AuthorListLayout::class,
+        ];
+    }
+
+    public function remove(Request $request): void
+    {
+        $user = User::with('articles', 'customRole')->findOrFail($request->get('id'));
+
+        if ($user) {
+            if ($user->articles->count() > 0) {
+                foreach ($user->articles as $articles) {
+                    $article->delete();
+                }
+            }
+
+            $user->delete();
+            
+            Toast::info('Author deleted successfully');
+        } else {
+            Toast::error('Error in deleting the author.');
+        }
     }
 }

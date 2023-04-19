@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Layouts\Author;
 
-use App\Models\AuthorDetails;
+use App\Models\Article;
 use App\Models\User;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
@@ -10,7 +10,7 @@ use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
-class AuthorListLayout extends Table
+class AuthorArticlesListLayout extends Table
 {
     /**
      * Data source.
@@ -20,7 +20,7 @@ class AuthorListLayout extends Table
      *
      * @var string
      */
-    protected $target = 'authors';
+    protected $target = 'articles';
 
     /**
      * Get the table cells to be displayed.
@@ -29,46 +29,49 @@ class AuthorListLayout extends Table
      */
     protected function columns(): array
     {
+        // title, published, image, slug
         return [
-            TD::make('name', 'Name')
+            TD::make('image', 'Image')
+                ->render(function (Article $article) {
+                    return '<img style=" width: 100px;" src='.$article->image.' alt="preview"></img>';
+                }),
+
+            
+            TD::make('title', 'Title')
                 ->sort()
-                ->render(function (User $user) {
-                    return Link::make($user->name)
-                        ->route('platform.author.articles', $user);
+                ->render(function (Article $article) {
+                    return Link::make($article->title)
+                        ->route('platform.article.edit', $article);
                 }),
 
-            TD::make('email', 'Email')
+            TD::make('published', 'Published At')
                 ->sort()
-                ->render(function (User $user) {
-                    return $user->email;
+                ->render(function (Article $article) {
+                    return $article->published_at->diffForHumans(). ' | ' . $article->published_at->format('d M Y');
                 }),
 
-            TD::make('articles', '# of Articles')
-                ->render(function (User $user) {
-                    return $user->articles->count();
-                }),
-
-            TD::make('created_at', 'Created')
-                ->render(function (User $user) {
-                    return $user->created_at->diffForHumans();
+            TD::make('slug', 'Slug')
+                ->sort()
+                ->render(function (Article $article) {
+                    return $article->slug;
                 }),
 
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
                 ->width('100px')
-                ->render(function (User $user) {
+                ->render(function (Article $article) {
                     return DropDown::make()
                         ->icon('options-vertical')
                         ->list([
                             Link::make(__('Edit'))
-                                ->route('platform.author.edit', $user)
+                                ->route('platform.article.edit', $article)
                                 ->icon('pencil'),
 
                             Button::make(__('Delete'))
                                 ->method('remove')
-                                ->confirm(__('Are you sure you want to delete the author?'))
+                                ->confirm(__('Are you sure you want to delete the article?'))
                                 ->parameters([
-                                    'id' => $user->id,
+                                    'id' => $article->id,
                                 ])
                                 ->icon('trash'),
                         ]);

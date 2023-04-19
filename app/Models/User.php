@@ -72,4 +72,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(CustomRole::class, 'role_id', 'id');
     }
+
+    public function authorDetails()
+    {
+        return $this->hasOne(AuthorDetails::class);
+    }
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
 }

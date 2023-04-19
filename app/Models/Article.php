@@ -10,6 +10,10 @@ class Article extends Model
 {
     use HasFactory, AsSource;
 
+    protected $dates = [
+        'published_at',
+    ];
+
     protected $fillable = [
         'title',
         'subtitle',

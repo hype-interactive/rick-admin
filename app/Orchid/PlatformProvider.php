@@ -26,17 +26,25 @@ class PlatformProvider extends OrchidServiceProvider
     public function registerMainMenu(): array
     {
         return [
-            Menu::make(_('Dashboard'))
+            Menu::make(__('Dashboard'))
                 ->icon('chart')
                 ->route('platform.index'),
 
-            Menu::make('News')
-                ->icon('docs')
-                ->route('platform.news'),
+            Menu::make(__('Authors'))
+                ->icon('people')
+                ->route('platform.authors'),
 
-            Menu::make('Faqs')
-                ->icon('question')
-                ->route('platform.faqs'),
+            Menu::make(__('Articles'))
+                ->icon('note')
+                ->route('platform.articles'),
+
+            // Menu::make('News')
+            //     ->icon('docs')
+            //     ->route('platform.news'),
+
+            // Menu::make('Faqs')
+            //     ->icon('question')
+            //     ->route('platform.faqs'),
                 
             Menu::make(__('Users'))
                 ->icon('user')

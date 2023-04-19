@@ -15,6 +15,9 @@ use App\Orchid\Screens\News\NewsEditScreen;
 use App\Orchid\Screens\News\NewsListScreen;
 use App\Orchid\Screens\Author\AuthorListScreen;
 use App\Orchid\Screens\Author\AuthorEditScreen;
+use App\Orchid\Screens\Author\AuthorArticlesListScreen;
+use App\Orchid\Screens\Article\ArticleListScreen;
+use App\Orchid\Screens\Article\ArticleEditScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
@@ -135,5 +138,56 @@ Route::screen('faq/{faq?}', FAQsEditScreen::class)
         return $trail
             ->parent('platform.faqs')
             ->push(__('Edit'), route('platform.faqs.faq'));
+    });
+
+
+// Authors
+
+// Home > Authors
+Route::screen('authors', AuthorListScreen::class)
+    ->name('platform.authors')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push(__('Authors'), route('platform.authors'));
+    });
+
+// Home > Authors > Edit
+Route::screen('author/{author?}', AuthorEditScreen::class)
+    ->name('platform.author.edit')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.authors')
+            ->push(__('Edit'), route('platform.author.edit'));
+    });
+
+// Home > Author > Articles
+Route::screen('articles-by-author/{author?}', AuthorArticlesListScreen::class)
+    ->name('platform.author.articles')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.authors')
+            ->push(__('Edit'), route('platform.author.articles'));
+    });
+
+
+// Articles
+
+// Home > Articles
+Route::screen('articles', ArticleListScreen::class)
+    ->name('platform.articles')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push(__('Articles'), route('platform.articles'));
+    });
+
+// Home > Article > Edit
+Route::screen('article/{article?}', ArticleEditScreen::class)
+    ->name('platform.article.edit')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.articles')
+            ->push(__('Edit'), route('platform.article.edit'));
     });
 
