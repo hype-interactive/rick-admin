@@ -21,7 +21,7 @@ class CreateArticlesTable extends Migration
             $table->timestamp('published_at')->nullable();
             $table->text('content');
             $table->string('image')->nullable();
-            $table->string('slug')->unique();
+            $table->string('slug')->unique()->nullable();
             $table->unsignedInteger('category_id');
             $table->tinyInteger('visibility')->default(1);
             $table->tinyInteger('pin')->default(0);

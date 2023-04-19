@@ -12,7 +12,6 @@ use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\Select;
-use Orchid\Screen\Fields\Quill;
 use Orchid\Screen\Fields\Cropper;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Alert;
@@ -87,11 +86,13 @@ class AuthorEditScreen extends Screen
                 Group::make([
                     Input::make('author.name')
                         ->title('Name')
+                        ->required()
                         ->placeholder('Author name')
                         ->help('Author\'s name'),
 
                     Input::make('author.email')
                         ->title('Email')
+                        ->required()
                         ->placeholder('Author email')
                         ->help('Author\'s email'),
                     ]),
@@ -99,14 +100,21 @@ class AuthorEditScreen extends Screen
                 Group::make([
                     Input::make('author.phone')
                         ->title('Phone')
+                        ->required()
                         ->placeholder('Author phone')
                         ->help('Author\'s phone'),
 
                     Input::make('author.title')
                         ->title('Author\'s title')
+                        ->required()
                         ->value($this->author->authorDetails->title ?? '')
                         ->help('Author\'s title within the company'),
                 ]),
+
+                Cropper::make('author.image')
+                    ->targetUrl()
+                    ->title('Image')
+                    ->help('Author\'s image'),
 
             ])
         ];
@@ -120,6 +128,10 @@ class AuthorEditScreen extends Screen
      */
     public function createOrUpdate(User $user, Request $request)
     {
+        // setting password and role
+        $user->password = bcrypt($request->get('author')['email']);
+        $user->role_id = CustomRole::where('name', 'author')->first()->id;
+
         $user->fill($request->get('author'))->save();
 
         $user->authorDetails()->updateOrCreate(
