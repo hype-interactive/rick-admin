@@ -45,9 +45,9 @@ class AdvertListScreen extends Screen
     public function commandBar(): array
     {
         return [
-            Link::make(__('Add'))
-                ->icon('plus')
-                ->route('platform.advert.edit', null)
+            // Link::make(__('Add'))
+            //     ->icon('plus')
+            //     ->route('platform.advert.edit', null)
         ];
     }
 

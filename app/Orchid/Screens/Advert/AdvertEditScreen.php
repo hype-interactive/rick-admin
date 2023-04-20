@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Fields\Group;
+use Orchid\Screen\Fields\Switcher;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\Cropper;
@@ -56,10 +57,10 @@ class AdvertEditScreen extends Screen
     public function commandBar(): array
     {
         return [
-            Button::make('Create')
-                ->icon('note')
-                ->method('createOrUpdate')
-                ->canSee(!$this->exists),
+            // Button::make('Create')
+            //     ->icon('note')
+            //     ->method('createOrUpdate')
+            //     ->canSee(!$this->exists),
 
             Button::make('Update')
                 ->icon('pencil')
@@ -99,10 +100,17 @@ class AdvertEditScreen extends Screen
                         ->help('Enter the type of the advert for viewing purposes'),
                 ]),
 
-                TextArea::make('advert.description')
-                    ->title('Description')
-                    ->placeholder('Description')
-                    ->help('Enter the description of the advert'),
+                Group::make([
+                    TextArea::make('advert.description')
+                        ->title('Description')
+                        ->placeholder('Description')
+                        ->help('Enter the description of the advert'),
+
+                    Switcher::make('advert.visibility')
+                        ->title('Visibility')
+                        ->sendTrueOrFalse()
+                        ->help('Enter the visibility of the advert, if it is visible or not'),
+                ]),
 
                 Group::make([
                     Input::make('advert.price')

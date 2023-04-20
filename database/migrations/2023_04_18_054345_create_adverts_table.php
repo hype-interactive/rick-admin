@@ -19,10 +19,29 @@ class CreateAdvertsTable extends Migration
             $table->string('description')->nullable();
             $table->enum('type', ['vertical', 'horizontal']);
             $table->string('link')->nullable();
+            $table->tinyInteger('visibility')->default(1);
             $table->decimal('price', 13, 2)->nullable();
             $table->string('image')->nullable();
             $table->nullableTimestamps();
         });
+
+        DB::table('adverts')->insert([
+            'title' => 'Advert 1',
+            'description' => 'Advert 1 description',
+            'type' => 'vertical',
+            'link' => 'https://www.google.com',
+            'price' => 100.00,
+            'image' => 'https://via.placeholder.com/640x480.png/00ddee?text=image1',
+        ]);
+
+        DB::table('adverts')->insert([
+            'title' => 'Advert 2',
+            'description' => 'Advert 2 description',
+            'type' => 'horizontal',
+            'link' => 'https://www.google.com',
+            'price' => 200.00,
+            'image' => 'https://via.placeholder.com/640x480.png/00dded?text=image2',
+        ]);
     }
 
     /**
