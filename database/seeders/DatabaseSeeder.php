@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
             InterviewSeeder::class,
             ArtistSeeder::class,
             LyricsSeeder::class,
-            AdvertSeeder::class
+            AdvertSeeder::class,
+            LogSeeder::class,
         ]);
     }
 }

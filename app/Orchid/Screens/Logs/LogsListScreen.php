@@ -3,6 +3,14 @@
 namespace App\Orchid\Screens\Logs;
 
 use Orchid\Screen\Screen;
+use Orchid\Screen\Actions\Link;
+use Orchid\Support\Facades\Toast;
+use Orchid\Support\Facades\Layout;
+use App\Orchid\Layouts\Logs\LogsListLayout;
+
+use Illuminate\Http\Request;
+
+use App\Models\Log as CustomLog;
 
 class LogsListScreen extends Screen
 {
@@ -11,7 +19,9 @@ class LogsListScreen extends Screen
      *
      * @var string
      */
-    public $name = 'LogsListScreen';
+    public $name = 'Logs';
+
+    public $description = 'Log of all actions performed';
 
     /**
      * Query data.
@@ -20,7 +30,9 @@ class LogsListScreen extends Screen
      */
     public function query(): array
     {
-        return [];
+        return [
+            'logs' => CustomLog::with('actor')->latest('updated_at')->paginate(),
+        ];
     }
 
     /**
@@ -40,6 +52,8 @@ class LogsListScreen extends Screen
      */
     public function layout(): array
     {
-        return [];
+        return [
+            LogsListLayout::class
+        ];
     }
 }
