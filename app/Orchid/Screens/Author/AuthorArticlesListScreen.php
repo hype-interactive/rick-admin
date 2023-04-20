@@ -44,7 +44,7 @@ class AuthorArticlesListScreen extends Screen
         }
 
         return [
-            'articles' => Article::where('user_id', $author->id)->paginate(),
+            'articles' => Article::where('user_id', $author->id)->latest('updated_at')->paginate(),
             'author' => $author->id,
         ];
     }
@@ -73,5 +73,12 @@ class AuthorArticlesListScreen extends Screen
         return [
             AuthorArticlesListLayout::class
         ];
+    }
+
+    public function remove(Request $request): void
+    {
+        Article::findOrFail($request->get('id'))->delete();
+
+        Toast::info(__('Article was removed'));
     }
 }

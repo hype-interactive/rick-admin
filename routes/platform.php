@@ -18,6 +18,8 @@ use App\Orchid\Screens\Author\AuthorEditScreen;
 use App\Orchid\Screens\Author\AuthorArticlesListScreen;
 use App\Orchid\Screens\Article\ArticleListScreen;
 use App\Orchid\Screens\Article\ArticleEditScreen;
+use App\Orchid\Screens\Category\CategoryListScreen;
+use App\Orchid\Screens\Category\CategoryArticlesListScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
@@ -167,7 +169,7 @@ Route::screen('articles-by-author/{author?}', AuthorArticlesListScreen::class)
     ->breadcrumbs(function (Trail $trail){
         return $trail
             ->parent('platform.authors')
-            ->push(__('Edit'), route('platform.author.articles'));
+            ->push(__('Articles'), route('platform.author.articles'));
     });
 
 
@@ -189,5 +191,27 @@ Route::screen('article/{article?}', ArticleEditScreen::class)
         return $trail
             ->parent('platform.articles')
             ->push(__('Edit'), route('platform.article.edit'));
+    });
+
+
+// Categories
+
+// Home > Categories
+Route::screen('categories', CategoryListScreen::class)
+    ->name('platform.categories')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push(__('Categories'), route('platform.categories'));
+    });
+
+
+// Home > Category > Articles
+Route::screen('articles-by-category/{category?}', CategoryArticlesListScreen::class)
+    ->name('platform.category.articles')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.categories')
+            ->push(__('Articles'), route('platform.category.articles'));
     });
 

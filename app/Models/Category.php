@@ -16,4 +16,9 @@ class Category extends Model
         'visibility',
         'pin',
     ];
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
 }

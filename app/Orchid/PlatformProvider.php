@@ -34,6 +34,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('people')
                 ->route('platform.authors'),
 
+            Menu::make(__('Categories'))
+                ->icon('layers')
+                ->route('platform.categories'),
+
             Menu::make(__('Articles'))
                 ->icon('note')
                 ->route('platform.articles'),
