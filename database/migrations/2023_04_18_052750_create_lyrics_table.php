@@ -17,7 +17,8 @@ class CreateLyricsTable extends Migration
             $table->increments('id');
             $table->string('image')->nullable();
             $table->string('cover_image')->nullable();
-            $table->text('song')->nullable();
+            $table->string('song')->nullable();
+            $table->text('content')->nullable();
             $table->unsignedInteger('artist_id');
             $table->string('album')->nullable();
             $table->string('audio_link')->nullable();

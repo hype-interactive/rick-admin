@@ -46,6 +46,15 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('badge')
                 ->route('platform.adverts'),
 
+            Menu::make(__('Lyrics'))
+                ->icon('book-open')
+                ->route('platform.lyrics'),
+
+            Menu::make(__('Logs'))
+                ->icon('config')
+                ->route('platform.logs')
+                ->title(__('Logs')),
+
             // Menu::make('News')
             //     ->icon('docs')
             //     ->route('platform.news'),

@@ -22,6 +22,9 @@ use App\Orchid\Screens\Article\ArticleListScreen;
 use App\Orchid\Screens\Article\ArticleEditScreen;
 use App\Orchid\Screens\Category\CategoryListScreen;
 use App\Orchid\Screens\Category\CategoryArticlesListScreen;
+use App\Orchid\Screens\Lyrics\LyricsListScreen;
+use App\Orchid\Screens\Lyrics\LyricsEditScreen;
+use App\Orchid\Screens\Logs\LogsListScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
@@ -238,3 +241,35 @@ Route::screen('advert/{advert?}', AdvertEditScreen::class)
             ->push(__('Edit'), route('platform.advert.edit'));
     });
 
+
+// Lyrics
+
+// Home > Lyrics
+Route::screen('lyrics-list', LyricsListScreen::class)
+    ->name('platform.lyrics')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push(__('Lyrics'), route('platform.lyrics'));
+    });
+
+// Home > Lyrics > Edit
+Route::screen('lyrics/{lyrics?}', LyricsEditScreen::class)
+    ->name('platform.lyrics.edit')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.lyrics')
+            ->push(__('Edit'), route('platform.lyrics.edit'));
+    });
+
+
+// Logs
+
+// Home > Logs
+Route::screen('logs', LogsListScreen::class)
+    ->name('platform.logs')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push(__('Logs'), route('platform.logs'));
+    });

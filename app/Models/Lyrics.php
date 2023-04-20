@@ -16,6 +16,7 @@ class Lyrics extends Model
         'image',
         'cover_image',
         'song',
+        'content',
         'artist_id',
         'album',
         'audio_link',
