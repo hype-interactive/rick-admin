@@ -13,6 +13,8 @@ use App\Orchid\Screens\FAQs\FAQsEditScreen;
 use App\Orchid\Screens\FAQs\FAQsListScreen;
 use App\Orchid\Screens\News\NewsEditScreen;
 use App\Orchid\Screens\News\NewsListScreen;
+use App\Orchid\Screens\Advert\AdvertEditScreen;
+use App\Orchid\Screens\Advert\AdvertListScreen;
 use App\Orchid\Screens\Author\AuthorListScreen;
 use App\Orchid\Screens\Author\AuthorEditScreen;
 use App\Orchid\Screens\Author\AuthorArticlesListScreen;
@@ -213,5 +215,26 @@ Route::screen('articles-by-category/{category?}', CategoryArticlesListScreen::cl
         return $trail
             ->parent('platform.categories')
             ->push(__('Articles'), route('platform.category.articles'));
+    });
+
+
+// Adverts
+
+// Home > Adverts
+Route::screen('adverts', AdvertListScreen::class)
+    ->name('platform.adverts')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push(__('Adverts'), route('platform.adverts'));
+    });
+
+// Home > Advert > Edit
+Route::screen('advert/{advert?}', AdvertEditScreen::class)
+    ->name('platform.advert.edit')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.adverts')
+            ->push(__('Edit'), route('platform.advert.edit'));
     });
 
