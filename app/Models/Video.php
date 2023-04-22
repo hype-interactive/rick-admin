@@ -11,6 +11,7 @@ class Video extends Model
     use HasFactory, AsSource;
 
     protected $fillable = [
+        'title',
         'url',
         'slug',
         'visibility',
