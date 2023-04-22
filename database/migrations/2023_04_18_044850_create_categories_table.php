@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateCategoriesTable extends Migration
 {
@@ -21,6 +22,13 @@ class CreateCategoriesTable extends Migration
             $table->tinyInteger('pin')->default(0);
             $table->nullableTimestamps();
         });
+
+        //create entertainment,sports and health categories
+        DB::table('categories')->insert([
+            ['name' => 'Entertainment', 'slug' => 'entertainment', 'visibility' => 1, 'pin' => 1],
+            ['name' => 'Sports', 'slug' => 'sports', 'visibility' => 1, 'pin' => 1],
+            ['name' => 'Health', 'slug' => 'health', 'visibility' => 1, 'pin' => 1],
+        ]);
     }
 
     /**

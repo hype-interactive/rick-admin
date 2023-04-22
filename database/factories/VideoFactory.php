@@ -25,6 +25,7 @@ class VideoFactory extends Factory
             'url' => $this->faker->url,
             'slug' => $this->faker->slug(3, false),
             'visibility' => rand(0, 1),
+            'thumbnail' => $this->faker->imageUrl(640, 480),
             'published_at' => $this->faker->dateTimeBetween('-1 month', 'now'),
         ];
     }

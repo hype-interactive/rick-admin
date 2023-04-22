@@ -17,6 +17,7 @@ class CreateVideosTable extends Migration
             $table->increments('id');
             $table->string('url');
             $table->string('slug')->nullable();
+            $table->string('thumbnail')->nullable();
             $table->tinyInteger('visibility')->default(1);
             $table->timestamp('published_at')->nullable();
             $table->nullableTimestamps();

@@ -51,10 +51,10 @@ class CategoryListLayout extends Table
                     return $category->articles->count();
                 }),
 
-            TD::make('created_at', 'Created')
-                ->render(function (Category $category) {
-                    return $category->created_at->diffForHumans();
-                }),
+            // TD::make('created_at', 'Created')
+            //     ->render(function (Category $category) {
+            //         return $category->created_at->diffForHumans();
+            //     }),
 
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)

@@ -29,7 +29,7 @@ class ArticleFactory extends Factory
             'content' => $this->faker->paragraph(10),
             'image' => $this->faker->imageUrl(),
             'slug' => $this->faker->slug(3, false),
-            'category_id' => rand(1, 10),
+            'category_id' => rand(1, 3),
             'visibility' => rand(0, 1),
             'pin' => rand(0, 1),
         ];

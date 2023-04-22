@@ -20,6 +20,9 @@ class CreateInterviewsTable extends Migration
             $table->text('body')->nullable();
             $table->unsignedInteger('video_id');
             $table->string('slug')->nullable();
+            $table->timestamp('published_at')->nullable();
+            $table->boolean('visibility')->default(1);
+            $table->boolean('pin')->default(0);
 
             $table->index(["video_id"], 'fk_interviews_videos1_idx');
 
