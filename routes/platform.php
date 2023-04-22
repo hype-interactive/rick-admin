@@ -22,9 +22,12 @@ use App\Orchid\Screens\Article\ArticleListScreen;
 use App\Orchid\Screens\Article\ArticleEditScreen;
 use App\Orchid\Screens\Category\CategoryListScreen;
 use App\Orchid\Screens\Category\CategoryArticlesListScreen;
+use App\Orchid\Screens\Interview\InterviewsListScreen;
+use App\Orchid\Screens\Interview\InterviewEditScreen;
 use App\Orchid\Screens\Lyrics\LyricsListScreen;
 use App\Orchid\Screens\Lyrics\LyricsEditScreen;
 use App\Orchid\Screens\Logs\LogsListScreen;
+use App\Orchid\Screens\Video\VideoListScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
@@ -272,4 +275,37 @@ Route::screen('logs', LogsListScreen::class)
         return $trail
             ->parent('platform.index')
             ->push(__('Logs'), route('platform.logs'));
+    });
+
+
+// Videos
+
+// Home > Videos
+Route::screen('videos', VideoListScreen::class)
+    ->name('platform.videos')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push(__('Videos'), route('platform.videos'));
+    });
+
+
+// Interviews
+
+// Home > Interviews
+Route::screen('interviews', InterviewsListScreen::class)
+    ->name('platform.interviews')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push(__('Interviews'), route('platform.interviews'));
+    });
+
+// Home > Interview > Edit
+Route::screen('interview/{interview?}', InterviewEditScreen::class)
+    ->name('platform.interview.edit')
+    ->breadcrumbs(function (Trail $trail){
+        return $trail
+            ->parent('platform.interviews')
+            ->push(__('Edit'), route('platform.interview.edit'));
     });

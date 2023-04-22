@@ -22,6 +22,7 @@ class VideoFactory extends Factory
     public function definition()
     {
         return [
+            'title' => $this->faker->sentence(3),
             'url' => $this->faker->url,
             'slug' => $this->faker->slug(3, false),
             'visibility' => rand(0, 1),
