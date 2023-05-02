@@ -59,7 +59,7 @@ class Article extends Model
             return strlen($word) >= 3;
         });
 
-        $words = array_slice($words, 0,6);
+        $words = array_slice($words, 0,12);
 
         $rst_str = array_merge($words,[rand(1,1000),"rickmedia"]);
 

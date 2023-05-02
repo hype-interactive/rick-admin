@@ -20,8 +20,10 @@ class CreateLyricsTable extends Migration
             $table->string('song')->nullable();
             $table->text('content')->nullable();
             $table->unsignedInteger('artist_id');
+            $table->string('slug')->nullable();
             $table->string('album')->nullable();
             $table->string('audio_link')->nullable();
+            $table->boolean('pin')->default(0);
             $table->string('video_link')->nullable();
             $table->tinyInteger('visibility')->default(1);
 

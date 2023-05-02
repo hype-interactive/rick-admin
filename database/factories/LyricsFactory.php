@@ -29,6 +29,8 @@ class LyricsFactory extends Factory
             'album' => $this->faker->sentence(3, true),
             'audio_link' => $this->faker->url,
             'video_link' => $this->faker->url,
+            'pin' => rand(0, 1),
+            'slug' => $this->faker->slug,
             'visibility' => rand(0, 1),
         ];
     }

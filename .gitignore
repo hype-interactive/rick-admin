@@ -3,6 +3,7 @@
 /public/storage
 /storage/*.key
 /vendor
+!*/vendor/orchid/platform/resources/views/dashboard.blade.php
 .env
 .env.backup
 .phpunit.result.cache

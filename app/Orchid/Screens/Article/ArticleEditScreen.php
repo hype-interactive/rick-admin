@@ -67,10 +67,10 @@ class ArticleEditScreen extends Screen
                 ->method('preview')
                 ->icon('eye'),
 
-            ModalToggle::make('Create Tag')
-                ->modal('tagModal')
-                ->method('createTag')
-                ->icon('tag'),
+            // ModalToggle::make('Create Tag')
+            //     ->modal('tagModal')
+            //     ->method('createTag')
+            //     ->icon('tag'),
             
             Button::make('Create')
                 ->icon('note')
@@ -131,12 +131,12 @@ class ArticleEditScreen extends Screen
                         ->disabled()
                         ->help('Select article author'),
 
-                    Select::make('article.tags.')
-                        ->title('Tags')
-                        ->multiple()
-                        ->fromModel(Tag::class, 'name')
-                        ->disabled()
-                        ->help('Select article tags, to select multiple tags hold down the Ctrl (windows) / Command (Mac) button and click on the desired options.'),
+                    // Select::make('article.tags.')
+                    //     ->title('Tags')
+                    //     ->multiple()
+                    //     ->fromModel(Tag::class, 'name')
+                    //     ->disabled()
+                    //     ->help('Select article tags, to select multiple tags hold down the Ctrl (windows) / Command (Mac) button and click on the desired options.'),
                 ]),
 
                 Layout::rows([
@@ -196,11 +196,11 @@ class ArticleEditScreen extends Screen
                         ->fromModel(User::where('role_id', CustomRole::where('name', 'author')->first()->id), 'name')
                         ->help('Select article author'),
 
-                    Select::make('article.tags.')
-                        ->title('Tags')
-                        ->multiple()
-                        ->fromModel(Tag::class, 'name')
-                        ->help('Select article tags, to select multiple tags hold down the Ctrl (windows) / Command (Mac) button and click on the desired options.'),
+                    // Select::make('article.tags.')
+                    //     ->title('Tags')
+                    //     ->multiple()
+                    //     ->fromModel(Tag::class, 'name')
+                    //     ->help('Select article tags, to select multiple tags hold down the Ctrl (windows) / Command (Mac) button and click on the desired options.'),
                 ]),
 
                 Group::make([
@@ -241,15 +241,15 @@ class ArticleEditScreen extends Screen
         $article->published_at = $request->get('article.published_at') ? $request->get('article.published_at') : now(); // Set default value
         $article->fill($request->get('article'))->save();
 
-        $articleTags = $request->get('article')['tags'];
+        // $articleTags = $request->get('article')['tags'];
 
-        foreach ($articleTags as $tag) {
-            // create entries in article_tag table
-            ArticleTag::firstOrCreate([
-                'article_id' => $article->id,
-                'tag_id' => $tag
-            ]);
-        }
+        // foreach ($articleTags as $tag) {
+        //     // create entries in article_tag table
+        //     ArticleTag::firstOrCreate([
+        //         'article_id' => $article->id,
+        //         'tag_id' => $tag
+        //     ]);
+        // }
         
         Alert::info('You have successfully created an article.');
 
