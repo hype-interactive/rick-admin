@@ -36,6 +36,7 @@ use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
+use App\Orchid\Screens\CompainScreen;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +65,11 @@ Route::screen('profile', UserProfileScreen::class)
 // Home > System > Users
 Route::screen('users/{user}/edit', UserEditScreen::class)
     ->name('platform.systems.users.edit');
+
+// Home > Compaign
+Route::screen('compaign', CompainScreen::class)
+    ->name('platform.compain');
+   
 
 // Home > System > Users > Create
 Route::screen('users/create', UserEditScreen::class)

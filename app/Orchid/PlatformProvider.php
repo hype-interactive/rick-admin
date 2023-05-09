@@ -50,6 +50,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('book-open')
                 ->route('platform.lyrics'),
 
+            Menu::make(__('Compaigns'))
+                ->icon('bubbles')
+                ->route('platform.compain'),
+
                 
 
             // Menu::make(__('Interviews'))

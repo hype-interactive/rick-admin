@@ -38,7 +38,7 @@ class ArticleListScreen extends Screen
     public function query(): array
     {
         return [
-            'articles' => Article::with('author')->paginate(),
+            'articles' => Article::with('author')->latest()->paginate(),
         ];
     }
 

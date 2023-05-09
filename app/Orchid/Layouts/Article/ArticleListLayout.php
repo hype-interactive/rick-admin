@@ -54,13 +54,6 @@ class ArticleListLayout extends Table
                 ->render(function (Article $article) {
                     return $article->published_at->diffForHumans(). ' | ' . $article->published_at->format('d M Y');
                 }),
-
-            TD::make('slug', 'Slug')
-                ->sort()
-                ->render(function (Article $article) {
-                    return $article->slug;
-                }),
-
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
                 ->width('100px')
