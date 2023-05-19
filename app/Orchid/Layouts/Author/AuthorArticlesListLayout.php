@@ -44,11 +44,11 @@ class AuthorArticlesListLayout extends Table
                         ->route('platform.article.edit', $article);
                 }),
 
-            TD::make('published', 'Published At')
-                ->sort()
-                ->render(function (Article $article) {
-                    return $article->published_at->diffForHumans(). ' | ' . $article->published_at->format('d M Y');
-                }),
+            // TD::make('published', 'Published At')
+            //     ->sort()
+            //     ->render(function (Article $article) {
+            //         return $article->published_at->diffForHumans(). ' | ' . $article->published_at->format('d M Y');
+            //     }),
 
             TD::make('slug', 'Slug')
                 ->sort()

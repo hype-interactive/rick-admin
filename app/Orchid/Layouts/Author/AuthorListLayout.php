@@ -48,10 +48,10 @@ class AuthorListLayout extends Table
                     return $user->articles->count();
                 }),
 
-            TD::make('created_at', 'Created')
-                ->render(function (User $user) {
-                    return $user->created_at->diffForHumans();
-                }),
+            // TD::make('created_at', 'Created')
+            //     ->render(function (User $user) {
+            //         return $user->created_at->diffForHumans();
+            //     }),
 
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
