@@ -23,6 +23,7 @@ use Orchid\Screen\Fields\Quill;
 use Orchid\Screen\Fields\Cropper;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Alert;
+use Orchid\Screen\Fields\SimpleMDE;
 
 class ArticleEditScreen extends Screen
 {
@@ -82,10 +83,12 @@ class ArticleEditScreen extends Screen
                 ->method('createOrUpdate')
                 ->canSee($this->exists),
 
+
             Button::make('Delete')
                 ->icon('trash')
                 ->method('delete')
                 ->canSee($this->exists)
+            
         ];
     }
 
@@ -176,6 +179,7 @@ class ArticleEditScreen extends Screen
 
                     Input::make('article.subtitle')
                         ->title('Subtitle')
+                        ->required()
                         ->placeholder('Article subtitle')
                         ->help('Enter article subtitle'),
 
@@ -188,6 +192,7 @@ class ArticleEditScreen extends Screen
                 Group::make([
                     Select::make('article.category_id')
                         ->title('Category')
+                        ->required()
                         ->fromModel(Category::class, 'name')
                         ->help('Select article category'),
 
@@ -208,6 +213,7 @@ class ArticleEditScreen extends Screen
                         ->title('Visibility')
                         ->sendTrueOrFalse()
                         ->placeholder('Select article visibility')
+                        ->required()
                         ->help('Select article visibility'),
 
                     Switcher::make('article.pin')
@@ -219,11 +225,14 @@ class ArticleEditScreen extends Screen
 
                 Cropper::make('article.image')
                     ->title('Image')
+                    ->required()
                     ->targetUrl()
                     ->help('Upload article image'),
 
-                Quill::make('article.content')
+
+                SimpleMDE::make('article.content')
                     ->title('Content')
+                    ->required()
                     ->placeholder('Enter article content')
                     ->help('Enter article content'),
             ])
