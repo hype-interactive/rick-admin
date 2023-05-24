@@ -230,7 +230,7 @@ class ArticleEditScreen extends Screen
                     ->help('Upload article image'),
 
 
-                SimpleMDE::make('article.content')
+                Quill::make('article.content')
                     ->title('Content')
                     ->required()
                     ->placeholder('Enter article content')
