@@ -7,10 +7,13 @@ use App\Models\Article;
 use App\Models\ArticleTag;
 use App\Models\Tag;
 use App\Models\Category;
+use App\Models\Client;
 use App\Models\CustomRole;
 use App\Models\User;
+use App\Mail\ArticleCreated;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Fields\Group;
@@ -259,6 +262,13 @@ class ArticleEditScreen extends Screen
         //         'tag_id' => $tag
         //     ]);
         // }
+
+        // send email notification to all subscribed clients
+        $subscribers = Client::all();
+
+        foreach ($subscribers as $subscriber) {
+            Mail::to($subscriber->email)->send(new ArticleCreated($subscriber, $article));
+        }
 
         Alert::info('You have successfully created an article.');
 
