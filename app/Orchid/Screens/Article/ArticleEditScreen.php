@@ -72,7 +72,7 @@ class ArticleEditScreen extends Screen
             //     ->modal('tagModal')
             //     ->method('createTag')
             //     ->icon('tag'),
-            
+
             Button::make('Create')
                 ->icon('note')
                 ->method('createOrUpdate')
@@ -88,7 +88,7 @@ class ArticleEditScreen extends Screen
                 ->icon('trash')
                 ->method('delete')
                 ->canSee($this->exists)
-            
+
         ];
     }
 
@@ -230,7 +230,7 @@ class ArticleEditScreen extends Screen
                     ->help('Upload article image'),
 
 
-                SimpleMDE::make('article.content')
+                Quill::make('article.content')
                     ->title('Content')
                     ->required()
                     ->placeholder('Enter article content')
@@ -259,7 +259,7 @@ class ArticleEditScreen extends Screen
         //         'tag_id' => $tag
         //     ]);
         // }
-        
+
         Alert::info('You have successfully created an article.');
 
         return redirect()->route('platform.articles');

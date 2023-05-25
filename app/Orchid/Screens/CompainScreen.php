@@ -19,7 +19,7 @@ class CompainScreen extends Screen
      *
      * @var string
      */
-    public $name = 'Compaign';
+    public $name = 'Campaign';
     public $description = 'Send SMS to  all clients';
 
     /**
@@ -30,7 +30,12 @@ class CompainScreen extends Screen
     public function query(): array
     {
         $clients = Client::first();
-        $this->description = 'Send SMS to '.$clients->count().' clients';
+
+        if (isset($clients)
+            && $clients->count() > 0) {
+            $this->description = 'Send SMS to '. $clients->count() .' clients';
+        }
+
         return [
             'clients' => $clients,
         ];
@@ -68,7 +73,7 @@ class CompainScreen extends Screen
                 ->help('1 SMS = 60 characters')
                 ->placeholder('Enter your message here'),
             ]),
-            
+
         ];
     }
 

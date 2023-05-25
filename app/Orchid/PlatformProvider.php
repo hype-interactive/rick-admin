@@ -50,11 +50,11 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('book-open')
                 ->route('platform.lyrics'),
 
-            Menu::make(__('Compaigns'))
+            Menu::make(__('Campaigns'))
                 ->icon('bubbles')
                 ->route('platform.compain'),
 
-                
+
 
             // Menu::make(__('Interviews'))
             //     ->icon('microphone')
@@ -76,7 +76,7 @@ class PlatformProvider extends OrchidServiceProvider
             // Menu::make('Faqs')
             //     ->icon('question')
             //     ->route('platform.faqs'),
-                
+
             Menu::make(__('Users'))
                 ->icon('user')
                 ->route('platform.systems.users')
