@@ -265,6 +265,7 @@ class ArticleEditScreen extends Screen
         // $article->content = $request->get('article')['content'];
         $article->content = decodeInput($request->get('article')['content']);
         // $article->content = cleanQuillInput($request->get('article')['content']);
+        $exists = $article->exists;
         $article->save();
         // $article->fill($request->get('article'))->save();
 
