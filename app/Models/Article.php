@@ -96,4 +96,15 @@ class Article extends Model
     {
         return $this->hasMany(ArticleTag::class);
     }
+
+    //delete with all relations in boot method
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($article) {
+            $article->tags()->delete();
+        });
+    }
+
 }

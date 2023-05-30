@@ -9,7 +9,7 @@ A new media article **{{ $article->title }}** has been published. Check it out!
 {{-- {{ $article->image }} --}}
 
 
-@component('mail::button', ['url' => 'http://localhost:8000/'. strtolower($article->category->name) .'/' . $article->slug])
+@component('mail::button', ['url' => env('APP_URL'). strtolower($article->category->name) .'/' . $article->slug])
 View
 @endcomponent
 

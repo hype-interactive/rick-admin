@@ -17,6 +17,7 @@ class CreateClientsTable extends Migration
             $table->id();
             $table -> string('name')->nullable();
             $table -> string('phone')->unique();
+            $table -> string('email')->unique();
             $table -> text('session_id');
             $table-> boolean('status')->default(1);
 

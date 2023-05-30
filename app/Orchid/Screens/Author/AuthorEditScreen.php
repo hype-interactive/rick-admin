@@ -113,6 +113,8 @@ class AuthorEditScreen extends Screen
 
                 Cropper::make('author.image')
                     ->targetUrl()
+                    ->compress(65)
+                    ->required()
                     ->title('Image')
                     ->help('Author\'s image'),
 
