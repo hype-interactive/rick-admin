@@ -250,8 +250,20 @@ class ArticleEditScreen extends Screen
      */
     public function createOrUpdate(Article $article, Request $request)
     {
+        // dd($request->all());
+        $article->title = $request->get('article')['title'];
+        $article->subtitle = $request->get('article')['subtitle'];
         $article->published_at = $request->get('article.published_at') ? $request->get('article.published_at') : now(); // Set default value
-        $article->fill($request->get('article'))->save();
+        $article->category_id = $request->get('article')['category_id'];
+        $article->user_id = $request->get('article')['user_id'];
+        $article->visibility = $request->get('article')['visibility'];
+        $article->pin = $request->get('article')['pin'];
+        $article->image = $request->get('article')['image'];
+        // $article->content = $request->get('article')['content'];
+        $article->content = decodeInput($request->get('article')['content']);
+        // $article->content = cleanQuillInput($request->get('article')['content']);
+        $article->save();
+        // $article->fill($request->get('article'))->save();
 
         // $articleTags = $request->get('article')['tags'];
 
