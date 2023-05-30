@@ -75,11 +75,29 @@ class User extends Authenticatable
 
     public function authorDetails()
     {
-        return $this->hasOne(AuthorDetails::class);
+        return $this->hasOne(AuthorDetails::class, 'user_id', 'id');
     }
 
     public function articles()
     {
         return $this->hasMany(Article::class);
+    }
+
+    //logs
+    public function logs()
+    {
+        return $this->hasMany(Log::class, 'user_id', 'id');
+    }
+
+    //boot to delete author details when user is deleted
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($user) {
+            $user->articles()->delete();
+            $user->logs()->delete();
+            $user->authorDetails()->delete();
+        });
     }
 }

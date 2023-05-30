@@ -28,6 +28,8 @@ class CreateCategoriesTable extends Migration
             ['name' => 'Entertainment', 'slug' => 'entertainment', 'visibility' => 1, 'pin' => 1],
             ['name' => 'Sports', 'slug' => 'sports', 'visibility' => 1, 'pin' => 1],
             ['name' => 'Health', 'slug' => 'health', 'visibility' => 1, 'pin' => 1],
+            ['name' => 'Politics', 'slug' => 'politics', 'visibility' => 1, 'pin' => 1],
+            ['name' => 'Other', 'slug' => 'other', 'visibility' => 1, 'pin' => 1],
         ]);
     }
 

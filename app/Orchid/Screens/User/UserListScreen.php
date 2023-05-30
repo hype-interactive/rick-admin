@@ -9,6 +9,7 @@ use App\Orchid\Layouts\User\UserFiltersLayout;
 use App\Orchid\Layouts\User\UserListLayout;
 use Illuminate\Http\Request;
 use Orchid\Platform\Models\User;
+use App\Models\User as UserModel;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
@@ -114,9 +115,20 @@ class UserListScreen extends Screen
      */
     public function remove(Request $request): void
     {
-        User::findOrFail($request->get('id'))
-            ->delete();
+        $user = UserModel::with('articles', 'customRole')->findOrFail($request->get('id'));
 
-        Toast::info(__('User was removed'));
+        if ($user) {
+            if ($user->articles->count() > 0) {
+                foreach ($user->articles as $article) {
+                    $article->delete();
+                }
+            }
+
+            $user->delete();
+            
+            Toast::info('Author deleted successfully');
+        } else {
+            Toast::error('Error in deleting the author.');
+        }
     }
 }

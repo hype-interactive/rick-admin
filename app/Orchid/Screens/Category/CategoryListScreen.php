@@ -51,11 +51,11 @@ class CategoryListScreen extends Screen
     public function commandBar(): array
     {
         return [
-            ModalToggle::make(__('Add'))
-                ->icon('plus')
-                ->modal('addCategory')
-                ->modalTitle('Add Category')
-                ->method('addCategory')
+            // ModalToggle::make(__('Add'))
+            //     ->icon('plus')
+            //     ->modal('addCategory')
+            //     ->modalTitle('Add Category')
+            //     ->method('addCategory')
         ];
     }
 

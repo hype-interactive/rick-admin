@@ -67,9 +67,9 @@ Route::screen('users/{user}/edit', UserEditScreen::class)
     ->name('platform.systems.users.edit');
 
 // Home > Compaign
-Route::screen('compaign', CompainScreen::class)
+Route::screen('campaign', CompainScreen::class)
     ->name('platform.compain');
-   
+
 
 // Home > System > Users > Create
 Route::screen('users/create', UserEditScreen::class)
@@ -127,7 +127,7 @@ Route::screen('news', NewsListScreen::class)
             ->push(__('News'), route('platform.news'));
     });
 
-// Home > news > edit 
+// Home > news > edit
 Route::screen('news-edit/{news?}', NewsEditScreen::class)
     ->name('platform.news.edit')
     ->breadcrumbs(function(Trail $trail){

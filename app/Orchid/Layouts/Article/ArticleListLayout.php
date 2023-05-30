@@ -49,11 +49,7 @@ class ArticleListLayout extends Table
                         ->route('platform.author.edit', $article->author);
                 }),
 
-            // TD::make('published', 'Published At')
-            //     ->sort()
-            //     ->render(function (Article $article) {
-            //         return $article->published_at->diffForHumans(). ' | ' . $article->published_at->format('d M Y');
-            //     }),
+            
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
                 ->width('100px')

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
 class CreateRolesTable extends Migration
 {
@@ -30,6 +31,17 @@ class CreateRolesTable extends Migration
             $table->unique(["slug"], 'roles_slug_unique');
             $table->nullableTimestamps();
         });
+
+        // Insert some admin role and permissions   
+        DB::table($this->tableName)->insert([
+            ['slug'=> "admin", 'name'=>'admin','permissions'=> '{
+                "platform.index": "1",
+                "platform.systems.roles": "0",
+                "platform.systems.users": "0",
+                "platform.systems.attachment": "1"
+            }']
+        ]);
+
     }
 
     /**

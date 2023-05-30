@@ -72,13 +72,13 @@ class CategoryListLayout extends Table
                                     'id' => $category->id,
                                 ]),
 
-                            Button::make(__('Delete'))
-                                ->method('remove')
-                                ->confirm(__('Are you sure you want to delete the category?'))
-                                ->parameters([
-                                    'id' => $category->id,
-                                ])
-                                ->icon('trash'),
+                            // Button::make(__('Delete'))
+                            //     ->method('remove')
+                            //     ->confirm(__('Are you sure you want to delete the category?'))
+                            //     ->parameters([
+                            //         'id' => $category->id,
+                            //     ])
+                            //     ->icon('trash'),
                         ]);
                 }),
         ];
