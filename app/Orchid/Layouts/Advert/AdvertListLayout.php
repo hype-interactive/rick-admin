@@ -64,13 +64,13 @@ class AdvertListLayout extends Table
                                 ->route('platform.advert.edit', $advert)
                                 ->icon('pencil'),
 
-                            Button::make(__('Delete'))
-                                ->method('remove')
-                                ->confirm(__('Are you sure you want to delete the advert?'))
-                                ->parameters([
-                                    'id' => $advert->id,
-                                ])
-                                ->icon('trash'),
+                            // Button::make(__('Delete'))
+                            //     ->method('remove')
+                            //     ->confirm(__('Are you sure you want to delete the advert?'))
+                            //     ->parameters([
+                            //         'id' => $advert->id,
+                            //     ])
+                            //     ->icon('trash'),
                         ]);
                 }),
         ];

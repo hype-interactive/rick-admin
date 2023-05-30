@@ -66,15 +66,15 @@ class ArticleEditScreen extends Screen
     public function commandBar(): array
     {
         return [
-            ModalToggle::make('Preview')
-                ->modal('previewModal')
-                ->method('preview')
-                ->icon('eye'),
+            // ModalToggle::make('Preview')
+            //     ->modal('previewModal')
+            //     ->method('preview')
+            //     ->icon('eye'),
 
-            // ModalToggle::make('Create Tag')
-            //     ->modal('tagModal')
-            //     ->method('createTag')
-            //     ->icon('tag'),
+            ModalToggle::make('Create Tag')
+                ->modal('tagModal')
+                ->method('createTag')
+                ->icon('tag'),
 
             Button::make('Create')
                 ->icon('note')
@@ -137,12 +137,12 @@ class ArticleEditScreen extends Screen
                         ->disabled()
                         ->help('Select article author'),
 
-                    // Select::make('article.tags.')
-                    //     ->title('Tags')
-                    //     ->multiple()
-                    //     ->fromModel(Tag::class, 'name')
-                    //     ->disabled()
-                    //     ->help('Select article tags, to select multiple tags hold down the Ctrl (windows) / Command (Mac) button and click on the desired options.'),
+                    Select::make('article.tags.')
+                        ->title('Tags')
+                        ->multiple()
+                        ->fromModel(Tag::class, 'name')
+                        ->disabled()
+                        ->help('Select article tags, to select multiple tags hold down the Ctrl (windows) / Command (Mac) button and click on the desired options.'),
                 ]),
 
                 Layout::rows([
@@ -188,6 +188,7 @@ class ArticleEditScreen extends Screen
 
                     DateTimer::make('article.published_at')
                         ->title('Published At')
+                        ->required()
                         ->placeholder('Enter article published date')
                         ->help('Enter article published date'),
                 ]),
@@ -204,11 +205,12 @@ class ArticleEditScreen extends Screen
                         ->fromModel(User::where('role_id', CustomRole::where('name', 'author')->first()->id), 'name')
                         ->help('Select article author'),
 
-                    // Select::make('article.tags.')
-                    //     ->title('Tags')
-                    //     ->multiple()
-                    //     ->fromModel(Tag::class, 'name')
-                    //     ->help('Select article tags, to select multiple tags hold down the Ctrl (windows) / Command (Mac) button and click on the desired options.'),
+                    Select::make('article.tags.')
+                        ->title('Tags')
+                        ->required()
+                        ->multiple()
+                        ->fromModel(Tag::class, 'name')
+                        ->help('Select article tags, to select multiple tags hold down the Ctrl (windows) / Command (Mac) button and click on the desired options.'),
                 ]),
 
                 Group::make([
@@ -228,6 +230,7 @@ class ArticleEditScreen extends Screen
 
                 Cropper::make('article.image')
                     ->title('Image')
+                    ->compress(65)
                     ->required()
                     ->targetUrl()
                     ->help('Upload article image'),
@@ -265,22 +268,25 @@ class ArticleEditScreen extends Screen
         $article->save();
         // $article->fill($request->get('article'))->save();
 
-        // $articleTags = $request->get('article')['tags'];
+        $articleTags = $request->get('article')['tags'];
 
-        // foreach ($articleTags as $tag) {
-        //     // create entries in article_tag table
-        //     ArticleTag::firstOrCreate([
-        //         'article_id' => $article->id,
-        //         'tag_id' => $tag
-        //     ]);
-        // }
+        foreach ($articleTags as $tag) {
+            // create entries in article_tag table
+            ArticleTag::firstOrCreate([
+                'article_id' => $article->id,
+                'tag_id' => $tag
+            ]);
+        }
 
         // send email notification to all subscribed clients
-        $subscribers = Client::all();
+        if(!$exists && $article->visibility == 1){
 
-        foreach ($subscribers as $subscriber) {
-            Mail::to($subscriber->email)->send(new ArticleCreated($subscriber, $article));
+            $subscribers = Client::all();
+            foreach ($subscribers as $subscriber) {
+                Mail::to($subscriber->email)->send(new ArticleCreated($subscriber, $article));
+            }
         }
+
 
         Alert::info('You have successfully created an article.');
 

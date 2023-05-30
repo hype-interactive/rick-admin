@@ -50,9 +50,9 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('book-open')
                 ->route('platform.lyrics'),
 
-            Menu::make(__('Campaigns'))
-                ->icon('bubbles')
-                ->route('platform.compain'),
+            // Menu::make(__('Campaigns'))
+            //     ->icon('bubbles')
+            //     ->route('platform.compain'),
 
 
 
@@ -83,10 +83,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->permission('platform.systems.users')
                 ->title(__('Access rights')),
 
-            Menu::make(__('Roles'))
-                ->icon('lock')
-                ->route('platform.systems.roles')
-                ->permission('platform.systems.roles'),
+            // Menu::make(__('Roles'))
+            //     ->icon('lock')
+            //     ->route('platform.systems.roles')
+            //     ->permission('platform.systems.roles'),
         ];
     }
 

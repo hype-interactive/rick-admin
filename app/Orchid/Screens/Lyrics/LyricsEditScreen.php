@@ -119,10 +119,14 @@ class LyricsEditScreen extends Screen
                         ->required()
                         ->title('Audio Link')
                         ->help('Enter link to song audio'),
+                        Switcher::make('lyrics.visibility')
+                        ->title('Visibility')
+                        ->sendTrueOrFalse()
+                        ->help('Specify whether the song is visible to public or not')
 
-                    Input::make('lyrics.video_link')
-                        ->title('Video Link')
-                        ->help('Enter link to official video')
+                    // Input::make('lyrics.video_link')
+                    //     ->title('Video Link')
+                    //     ->help('Enter link to official video')
                 ]),
 
                 Group::make([
@@ -130,10 +134,14 @@ class LyricsEditScreen extends Screen
                         ->title('Album Name')
                         ->help('Album name, if any, to which the song belong to.'),
 
-                    Switcher::make('lyrics.visibility')
-                        ->title('Visibility')
-                        ->sendTrueOrFalse()
-                        ->help('Specify whether the song is visible to public or not')
+                    
+
+                        Cropper::make('lyrics.image')
+                        ->title('Image')
+                        ->compress(65)
+                        ->required()
+                        ->targetUrl()
+                        ->help('Optional entry for image accompanying the lyrics display'),
                 ]),
 
                 Quill::make('lyrics.content')
@@ -141,17 +149,7 @@ class LyricsEditScreen extends Screen
                     ->required()
                     ->placeholder('Enter song lyrics, feel free to format as you like'),
 
-                Group::make([
-                    Cropper::make('lyrics.image')
-                        ->title('Image')
-                        ->targetUrl()
-                        ->help('Optional entry for image accompanying the lyrics display'),
-
-                    Cropper::make('lyrics.cover_image')
-                        ->title('Cover Image')
-                        ->targetUrl()
-                        ->help('Optional cover image, if none a default image will be used from the site')
-                ])
+               
             ])
         ];
     }

@@ -76,7 +76,7 @@ class AuthorListScreen extends Screen
 
         if ($user) {
             if ($user->articles->count() > 0) {
-                foreach ($user->articles as $articles) {
+                foreach ($user->articles as $article) {
                     $article->delete();
                 }
             }
