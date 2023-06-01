@@ -253,10 +253,21 @@ class ArticleEditScreen extends Screen
      */
     public function createOrUpdate(Article $article, Request $request)
     {
-        $article->published_at = $request->get('article.published_at') ? $request->get('article.published_at') : now(); 
+        // dd($request->all());
+        $article->title = $request->get('article')['title'];
+        $article->subtitle = $request->get('article')['subtitle'];
+        $article->published_at = $request->get('article.published_at') ? $request->get('article.published_at') : now(); // Set default value
+        $article->category_id = $request->get('article')['category_id'];
+        $article->user_id = $request->get('article')['user_id'];
+        $article->visibility = $request->get('article')['visibility'];
+        $article->pin = $request->get('article')['pin'];
+        $article->image = $request->get('article')['image'];
+        // $article->content = $request->get('article')['content'];
+        $article->content = decodeInput($request->get('article')['content']);
+        // $article->content = cleanQuillInput($request->get('article')['content']);
         $exists = $article->exists;
-        // Set default value
-        $article->fill($request->get('article'))->save();
+        $article->save();
+        // $article->fill($request->get('article'))->save();
 
         $articleTags = $request->get('article')['tags'];
 
@@ -276,7 +287,7 @@ class ArticleEditScreen extends Screen
                 Mail::to($subscriber->email)->send(new ArticleCreated($subscriber, $article));
             }
         }
-        
+
 
         Alert::info('You have successfully created an article.');
 
