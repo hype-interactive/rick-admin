@@ -27,6 +27,9 @@ use Orchid\Screen\Fields\Cropper;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Alert;
 use Orchid\Screen\Fields\SimpleMDE;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class ArticleEditScreen extends Screen
 {
@@ -261,12 +264,12 @@ class ArticleEditScreen extends Screen
         $article->user_id = $request->get('article')['user_id'];
         $article->visibility = $request->get('article')['visibility'];
         $article->pin = $request->get('article')['pin'];
-        $article->image = $request->get('article')['image'];
-        // $article->content = $request->get('article')['content'];
+        // $article->image = $request->get('article')['image'];
+        $article->image = $this->convertToWebp($request->get('article')['image']);
         $article->content = decodeInput($request->get('article')['content']);
-        // $article->content = cleanQuillInput($request->get('article')['content']);
         $exists = $article->exists;
         $article->save();
+
         // $article->fill($request->get('article'))->save();
 
         $articleTags = $request->get('article')['tags'];
@@ -323,4 +326,57 @@ class ArticleEditScreen extends Screen
 
         return back();
     }
+
+    
+
+    /**
+     * Prepare the field value before saving.
+     *
+     * @param  mixed  $value
+     *
+     * @return mixed
+     */
+  
+
+    /**
+     * Convert the image to WebP format.
+     *
+     * @param  mixed  $value
+     *
+     * @return mixed
+     */
+    private function convertToWebp($imageData)
+{
+    // Convert the image to WebP format using Intervention Image
+    
+    // dd($imageData);
+
+    $flag = true;
+    $try = 1;
+    while ($flag && $try <= 3):
+        try {
+            $image=Image::make($imageData);
+            //Image migrated successfully
+            $flag = false;
+        } catch (\Exception $e) {
+            Log::error($e);
+        }
+        $try++;
+    endwhile;
+
+    $image->encode('webp', 70);
+    // Generate a unique filename for the WebP image
+    $webpPath = 'public/images/' . uniqid('webp_') . '.webp';
+
+    // Save the WebP image
+    Storage::put($webpPath,$image->encoded,);
+
+    // Return the path to the WebP image
+    $url = Storage::url($webpPath);
+    return env('APP_URL').$url;
+}
+
+
+
+
 }
