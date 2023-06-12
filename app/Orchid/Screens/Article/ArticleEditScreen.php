@@ -233,7 +233,7 @@ class ArticleEditScreen extends Screen
 
                 Cropper::make('article.image')
                     ->title('Image')
-                    ->compress(65)
+                    ->compress(70)
                     ->required()
                     ->targetUrl()
                     ->help('Upload article image'),
@@ -364,7 +364,7 @@ class ArticleEditScreen extends Screen
         $try++;
     endwhile;
 
-    $image->encode('webp', 70);
+    $image->encode('webp', 80);
     // Generate a unique filename for the WebP image
     $webpPath = 'public/images/' . uniqid('webp_') . '.webp';
 
@@ -375,7 +375,6 @@ class ArticleEditScreen extends Screen
     $url = Storage::url($webpPath);
     return env('APP_URL').$url;
 }
-
 
 
 
