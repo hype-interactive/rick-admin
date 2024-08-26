@@ -350,12 +350,13 @@ class ArticleEditScreen extends Screen
     // Convert the image to WebP format using Intervention Image
     
     // dd($imageData);
+    // Log::info($imageData);
 
     $flag = true;
     $try = 1;
     while ($flag && $try <= 3):
         try {
-            $image=Image::make($imageData);
+            $image=Image::make("https://admin.rickmedia.co.tz/storage/2023/06/12/5cdc86f55dbe67519bd29c9490e4d0473acda1a3.png");
             //Image migrated successfully
             $flag = false;
         } catch (\Exception $e) {
@@ -370,6 +371,16 @@ class ArticleEditScreen extends Screen
 
     // Save the WebP image
     Storage::put($webpPath,$image->encoded,);
+
+    //delete the original image
+    if(Storage::exists($imageData)){
+        Log::info($imageData);
+        if(Storage::delete($imageData)){
+            Log::info('deleted');
+        }else{
+            Log::info('not deleted');
+    }
+}
 
     // Return the path to the WebP image
     $url = Storage::url($webpPath);
