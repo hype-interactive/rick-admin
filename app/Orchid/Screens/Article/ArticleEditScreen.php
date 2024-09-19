@@ -287,7 +287,7 @@ class ArticleEditScreen extends Screen
 
             $subscribers = Client::all();
             foreach ($subscribers as $subscriber) {
-                Mail::to($subscriber->email)->send(new ArticleCreated($subscriber, $article));
+                // Mail::to($subscriber->email)->send(new ArticleCreated($subscriber, $article));
             }
         }
 
