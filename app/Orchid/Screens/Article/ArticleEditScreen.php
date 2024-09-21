@@ -209,10 +209,10 @@ class ArticleEditScreen extends Screen
                 Storage::delete($imageData);
             }
 
-            return Storage::url($webpPath);
+            return env("APP_URL").Storage::url($webpPath);
         } catch (\Exception $e) {
             Log::error('Image conversion failed: ' . $e->getMessage());
-            return $imageData;  // Return original image if conversion fails
+            return env("APP_URL").$imageData;  // Return original image if conversion fails
         }
     }
 
