@@ -37,7 +37,7 @@ class ArticleListScreen extends Screen
      */
     public function query(): array
     {
-        dd(Article::with('author')->latest()->take(5)->get());
+        // dd(Article::with('author')->latest()->take(5)->get());
         return [
             'articles' => Article::with('author')->latest()->paginate(),
         ];
