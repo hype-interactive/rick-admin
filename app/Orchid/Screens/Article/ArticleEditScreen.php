@@ -150,7 +150,7 @@ class ArticleEditScreen extends Screen
         $articleData = $request->get('article');
         $article->fill($articleData);
         $article->published_at = $articleData['published_at'] ?? now();
-        $article->image = $this->convertToWebp($articleData['image']);
+        $article->image = env('APP_URL').$this->convertToWebp($articleData['image']);
         $article->content = $this->decodeContent($articleData['content']);
 
         $article->save();
