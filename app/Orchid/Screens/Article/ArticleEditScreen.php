@@ -58,7 +58,7 @@ class ArticleEditScreen extends Screen
                 Cropper::make('article.image')
                     ->title('Image')
                     ->required()
-                    ->targetRelativeUrl()
+                    ->targetUrl()
                     ->help('Upload article image'),
                 Quill::make('article.content')
                     ->title('Content')
@@ -209,10 +209,10 @@ class ArticleEditScreen extends Screen
                 Storage::delete($imageData);
             }
 
-            return env("APP_URL").Storage::url($webpPath);
+            return Storage::url($webpPath);
         } catch (\Exception $e) {
             Log::error('Image conversion failed: ' . $e->getMessage());
-            return env("APP_URL").$imageData;  // Return original image if conversion fails
+            return $imageData;  // Return original image if conversion fails
         }
     }
 
