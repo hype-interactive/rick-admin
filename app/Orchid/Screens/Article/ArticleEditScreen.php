@@ -199,20 +199,30 @@ class ArticleEditScreen extends Screen
     private function convertToWebp($imageData)
     {
         try {
-            $image = Image::make($imageData);
+            // Check if $imageData is a URL or a file path
+            if (filter_var($imageData, FILTER_VALIDATE_URL)) {
+                // If it's a URL, use it directly
+                $image = Image::make($imageData);
+            } else {
+                // If it's a file path, get the full storage path
+                $fullPath = Storage::path($imageData);
+                $image = Image::make($fullPath);
+            }
+    
             $image->encode('webp', 80);
-
+    
             $webpPath = 'public/images/' . uniqid('webp_') . '.webp';
             Storage::put($webpPath, $image->encoded);
-
+    
             if (Storage::exists($imageData)) {
                 Storage::delete($imageData);
             }
-
-            return env("APP_URL").Storage::url($webpPath);
+    
+            $webpUrl = Storage::url($webpPath);
+            return $webpUrl;
         } catch (\Exception $e) {
             Log::error('Image conversion failed: ' . $e->getMessage());
-            return env("APP_URL").$imageData;  // Return original image if conversion fails
+            return $imageData;  // Return original image data if conversion fails
         }
     }
 
