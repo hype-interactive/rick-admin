@@ -97,6 +97,11 @@ class Article extends Model
         return $this->hasMany(ArticleTag::class);
     }
 
+    public function articleTags()
+    {
+        return $this->hasMany(ArticleTag::class);
+    }
+
     //delete with all relations in boot method
     protected static function boot()
     {
